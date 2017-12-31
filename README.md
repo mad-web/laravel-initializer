@@ -102,14 +102,14 @@ class InstallerConfig
     }
 }
 ```
-Run it by passing "root" option - `artisan app:insstall --root`
+Run it by passing "root" option - `artisan app:install --root`
 
 If you want to move config file from the `app` directory to a different place, just add a new binding in the `AppServiceProvider`
 ```php
 $this->app->bind('project.installer', \AnotherNameSpace\InstallerConfig::class);
 ```
 
-####List of commands available to run
+#### List of commands available to run
 ```php
 $run
     ->artisan('command', ['argument' => 'argument_value', '-param' => 'param_value', '--option' => 'option_value', ...]) // Artisan command
