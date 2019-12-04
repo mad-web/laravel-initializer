@@ -20,8 +20,8 @@ class InitializerServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../stubs/install-class.stub' => app_path('Install.php'),
-            __DIR__.'/../stubs/update-class.stub' => app_path('Update.php'),
+            __DIR__.'/../stubs/install-class.stub' => $this->app['config']['initializer.installer.path'],
+            __DIR__.'/../stubs/update-class.stub' => $this->app['config']['initializer.updater.path'],
         ], 'initializers');
 
         $this->app->register(LaravelConsoleTaskServiceProvider::class);
@@ -41,8 +41,8 @@ class InitializerServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/initializer.php', 'initializer');
 
-        $this->app->bind('app.installer', \App\Install::class);
-        $this->app->bind('app.updater', \App\Update::class);
+        $this->app->bind('app.installer', $this->app['config']['initializer.installer.class']);
+        $this->app->bind('app.updater', $this->app['config']['initializer.updater.class']);
 
         $this->app->bind(Runner::class, Run::class);
     }
