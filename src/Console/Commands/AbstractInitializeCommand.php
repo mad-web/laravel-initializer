@@ -34,6 +34,14 @@ abstract class AbstractInitializeCommand extends Command
 
         $this->alert($this->title().' started');
 
+        if (is_array($env)) {
+
+            $this->error('Config not found in cache.');
+            $this->error('$ php artisan config:cache');
+
+            return 1;
+        }
+
         $result = $initializerInstance
             ->{$this->option('root') ? $env.'Root' : $env}
             ($container->makeWith(Run::class, ['artisanCommand' => $this]));
