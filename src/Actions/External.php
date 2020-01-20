@@ -54,7 +54,7 @@ class External extends Action
             }
         } : null);
 
-        $error = $Process->getErrorOutput();
+        $error = empty($Process->getErrorOutput()) ? $Process->getOutput() : $Process->getErrorOutput();
         $exitCode = $Process->getExitCode();
 
         if ($error and $exitCode > 0) {
