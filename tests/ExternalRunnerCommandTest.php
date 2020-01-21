@@ -57,4 +57,17 @@ class ExternalRunnerCommandTest extends RunnerCommandsTestCase
 
         $this->assertErrorAppeared('invalid-command', RuntimeException::class);
     }
+
+    /**
+     * @test
+     * @dataProvider initCommandsSet
+     */
+    public function external_supervisorctl($command)
+    {
+        $this->declareCommands(function (Run $run) {
+            $run->external('supervisorctl', 'status');
+        }, $command);
+
+        $this->assertErrorAppeared('supervisorctl', RuntimeException::class);
+    }
 }
