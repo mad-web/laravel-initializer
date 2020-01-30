@@ -64,6 +64,22 @@ php artisan vendor:publish --provider="MadWeb\Initializer\InitializerServiceProv
 
 _by default value is set to `app.env` for laravel, in most cases you don't need to override this value._
 
+If you are using advanced options, you must publish config file and set `options`.
+
+```php
+...
+'options' => [
+    'local' => [
+        'install' => ['migrate'],
+        'update' => ['fresh'],
+    ],
+    'production' => [
+        'install' => [],
+        'update' => [],
+    ],
+],
+...
+```
 ## Usage
 
 Usage of `app:install` and `app:update` command are the same except that `app:install` uses `Install` class and `app:update` uses `Update` class.
@@ -172,6 +188,48 @@ Run it by passing "**root**" option:
 artisan app:install --root
 ```
 
+If you need to perform actions with other parameters, you can call an action to check the parameter:
+
+```php
+namespace App;
+
+use MadWeb\Initializer\Contracts\Runner;
+
+class Install
+{
+    public function production(Runner $run) { ... }
+
+    public function local(Runner $run)
+    {
+        $run->external('composer', 'install')
+            ->external('npm', 'install')
+            ->external('npm', 'run', 'development');
+
+        if ($run->getOption('fresh')) {
+            $run->artisan('migrate:fresh', ['seed' => true]);
+        }
+        else{
+            $run->artisan('migrate');
+        }
+        
+        $run->artisan('cache:clear');
+
+        if ($run->getOption('supervisor')) {
+            $run->external('supervisorctl', 'reread')
+                ->external('supervisorctl', 'update');
+        }
+        
+        return $run;
+    }
+}
+```
+
+Run it by passing "**options**" option:
+
+```bash
+artisan app:install --options=fresh --options=supervisor
+```
+
 To see details of running actions use verbosity mode:
 
 ```bash
@@ -219,6 +277,8 @@ $run
     ->publishTag('public') // Publish specific tag
     ->publishTag(['public', 'assets']) // Publish multiple tags
     ->publishTagForce('public') // Force publish tags
+
+$run->getOption('fresh') // Check for additional parameters
 ```
 
 ### Laravel Nova
