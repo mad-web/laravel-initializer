@@ -185,7 +185,7 @@ class Install
 Run it by passing "**root**" option:
 
 ```bash
-artisan app:install --root
+php artisan app:install --root
 ```
 
 If you need to perform actions with other parameters, you can call an action to check the parameter:
@@ -227,7 +227,7 @@ class Install
 Run it by passing "**options**" option:
 
 ```bash
-artisan app:install --options=fresh --options=supervisor
+php artisan app:install --options=fresh --options=supervisor
 ```
 
 To see details of running actions use verbosity mode:
