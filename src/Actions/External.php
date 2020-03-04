@@ -30,9 +30,7 @@ class External extends Action
 
     public function run(): bool
     {
-        $Process = new Process(empty($this->arguments)
-            ? [$this->command]
-            : array_merge([$this->command], $this->arguments));
+        $Process = $this->createProcess();
         $Process->setTimeout(null);
 
         $isVerbose = $this->artisanCommand->getOutput()->isVerbose();
@@ -62,5 +60,14 @@ class External extends Action
         }
 
         return ! $exitCode;
+    }
+    
+    private function createProcess(): Process
+    {
+        if (empty($this->arguments)) {
+            return Process::fromShellCommandline($this->command);
+        }
+        
+        return new Process(array_merge([$this->command], $this->arguments));
     }
 }
