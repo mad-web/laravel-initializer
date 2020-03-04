@@ -61,13 +61,13 @@ class External extends Action
 
         return ! $exitCode;
     }
-    
+
     private function createProcess(): Process
     {
         if (empty($this->arguments)) {
             return Process::fromShellCommandline($this->command);
         }
-        
+
         return new Process(array_merge([$this->command], $this->arguments));
     }
 }
