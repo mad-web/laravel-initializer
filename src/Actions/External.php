@@ -31,7 +31,7 @@ class External extends Action
     public function run(): bool
     {
         $Process = new Process(empty($this->arguments)
-            ? $this->command
+            ? [$this->command]
             : array_merge([$this->command], $this->arguments));
         $Process->setTimeout(null);
 
