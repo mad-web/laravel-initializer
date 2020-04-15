@@ -43,7 +43,7 @@ abstract class Action
         return $this->failed;
     }
 
-    public function errorMessage(): string
+    public function errorMessage():? string
     {
         return $this->errorMessage;
     }
