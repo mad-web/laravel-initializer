@@ -1,4 +1,6 @@
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct-single.svg)](https://stand-with-ukraine.pp.ua)
+> ⚠️ Repository archived, new version maintaining under [Qruto](https://github.com/qruto/) organization. New version released 🎉 check out [qruto/laravel-flora](https://github.com/qruto/laravel-flora). Find [upgrade guide](https://github.com/qruto/laravel-flora/blob/main/UPGRADING.md) to switch from outdated version.
+
+🇺🇦 🤝 If you can support me, I would be very greatful!
 
 <p align="center">
     <img title="Laravel Initializer" width="500" src="docs/logo.png" />
