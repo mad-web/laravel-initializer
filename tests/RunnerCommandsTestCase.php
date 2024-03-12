@@ -52,4 +52,12 @@ abstract class RunnerCommandsTestCase extends TestCase
             ['app:update'],
         ];
     }
+
+    public function initCommandsOptionSet()
+    {
+        return [
+            ['app:install --options=some'],
+            ['app:update --options=some'],
+        ];
+    }
 }

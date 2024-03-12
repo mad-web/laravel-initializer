@@ -76,4 +76,6 @@ abstract class AbstractInitializeCommand extends Command
     abstract protected function getInitializerInstance(Container $container);
 
     abstract protected function title(): string;
+
+    abstract protected function getOptionsConfig(Container $container);
 }

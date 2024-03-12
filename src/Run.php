@@ -16,6 +16,8 @@ class Run implements RunnerContract
 {
     protected $artisanCommand;
 
+    protected $options;
+
     private $errorMessages = [];
 
     private $doneWithErrors = false;
@@ -23,6 +25,7 @@ class Run implements RunnerContract
     public function __construct(Command $artisanCommand)
     {
         $this->artisanCommand = $artisanCommand;
+        $this->options = $artisanCommand->option('options');
     }
 
     public function errorMessages(): array
@@ -95,5 +98,10 @@ class Run implements RunnerContract
     public function dispatchNow($job): RunnerContract
     {
         return $this->run(new Dispatch($this->artisanCommand, $job, true));
+    }
+
+    public function getOption(string $option): bool
+    {
+        return in_array($option, $this->options);
     }
 }
